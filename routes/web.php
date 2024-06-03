@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PieController;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -21,6 +22,7 @@ Route::get('/', function () {
 });
 
 Route::get('/generate-pdf', [DashboardController::class, 'generatePdf']);
+Route::get('/pie-chart', [PieController::class, 'pieChart']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
