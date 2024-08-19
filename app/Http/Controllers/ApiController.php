@@ -38,11 +38,12 @@ class ApiController extends Controller
         ])->get($apiUrl);
 
         $data = $response->json(); // Assuming data is in a 'data' key
-
         $currentPage = $request->query('page', 1);
+        $offset = ($currentPage - 1) * $perPage;
+        $items = array_slice($data, $offset, $perPage);
 
         $paginatedData = new LengthAwarePaginator(
-            $data,
+            $items,
             count($data),
             $perPage,
             $currentPage,
