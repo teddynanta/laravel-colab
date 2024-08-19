@@ -87,10 +87,10 @@ a
         </table>
     </div>
 
-    <h1>Distribusi Kategori Berita Bulan {{ $bulan }}</h1>
-    <canvas id="barChart" width="800" height="400"></canvas>
+    {{-- <h1>Distribusi Kategori Berita Bulan {{ $bulan }}</h1>
+    <canvas id="barChart" width="800" height="400"></canvas> --}}
     {{-- <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.js"></script> --}}
-    <script>
+    {{-- <script>
         var ctx = document.getElementById('barChart').getContext('2d');
         var chartData = JSON.parse('<?= json_encode($chartData) ?>');
 
@@ -116,7 +116,7 @@ a
                 }
             }
         });
-    </script>
+    </script> --}}
 </body>
 
 </html>

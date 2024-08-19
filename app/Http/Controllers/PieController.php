@@ -15,7 +15,7 @@ class PieController extends Controller
         setlocale(LC_TIME, 'id_ID');
         Carbon::setLocale('id');
         // $date = Carbon::now();
-        $specificMonth = Carbon::create(2024, 5, 1);
+        $specificMonth = Carbon::create(2024, 7, 1);
         $currentYear = $specificMonth->year;
         $currentMonth = $specificMonth->month;
         $bulan = $specificMonth->translatedformat('F');
