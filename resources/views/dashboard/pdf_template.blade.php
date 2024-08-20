@@ -1,4 +1,3 @@
-a
 <!DOCTYPE html>
 <html lang="en">
 
@@ -85,6 +84,7 @@ a
                 @endforeach
             </tbody>
         </table>
+        {{ $data->links() }}
     </div>
 
     {{-- <h1>Distribusi Kategori Berita Bulan {{ $bulan }}</h1>

@@ -49,6 +49,7 @@ class ApiController extends Controller
             $currentPage,
             ['path' => $request->url(), 'query' => $request->query()]
         );
+        // $paginatedData->groupBy('kodeindikator');
 
         return view('api_data', compact('paginatedData'));
         // return response()->json([

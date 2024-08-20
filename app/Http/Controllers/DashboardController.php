@@ -26,15 +26,16 @@ class DashboardController extends Controller
         $currentMonth = $specificMonth->month;
         $bulan = $specificMonth->translatedformat('F');
         // Fetch data from the database
-        $data = Berita::whereRaw('YEAR(tanggal_post) = ? AND MONTH(tanggal_post) = ?', [$currentYear, $currentMonth])
-            ->with('category')->orderBy('tanggal_post', 'asc')->get();
+        // $data = Berita::whereRaw('YEAR(tanggal_post) = ? AND MONTH(tanggal_post) = ?', [$currentYear, $currentMonth])
+        //     ->with('category')->orderBy('tanggal_post', 'asc')->get();
         $totalData = Berita::whereRaw('YEAR(tanggal_post) = ? AND MONTH(tanggal_post) = ?', [$currentYear, $currentMonth])
             ->count();
         $doc = Dokumen::whereRaw('YEAR(created_at) = ? AND MONTH(created_at) = ?', [$currentYear, $currentMonth])
             ->with('category')->orderBy('created_at', 'asc')->get();
         $totalDoc = Dokumen::whereRaw('YEAR(created_at) = ? AND MONTH(created_at) = ?', [$currentYear, $currentMonth])
             ->count();
-
+        $data = Berita::whereRaw('YEAR(tanggal_post) = ? AND MONTH(tanggal_post) = ?', [$currentYear, $currentMonth])
+            ->paginate(10);
         $news = Berita::whereRaw('YEAR(created_at) = ? AND MONTH(created_at) = ?', [$currentYear, $currentMonth])
             ->select('kategori_berita_id', DB::raw('count(*) as count'))
             ->groupBy('kategori_berita_id')
@@ -86,11 +87,11 @@ class DashboardController extends Controller
         $pdfContent = $pdf->output();
 
         // Return the PDF content as a response
-        return new Response($pdfContent, 200, [
-            'Content-Type' => 'application/pdf',
-            'Content-Disposition' => 'inline; filename="data.pdf"',
-        ]);
-        // return view('dashboard/pdf_template')->with(compact('data', 'doc', 'bulan', 'totalData', 'totalDoc', 'chartData'));
+        // return new Response($pdfContent, 200, [
+        //     'Content-Type' => 'application/pdf',
+        //     'Content-Disposition' => 'inline; filename="data.pdf"',
+        // ]);
+        return view('dashboard/pdf_template')->with(compact('data', 'doc', 'bulan', 'totalData', 'totalDoc', 'chartData'));
     }
 
     /**
