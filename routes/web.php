@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiController;
+use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\PieController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
@@ -25,6 +26,8 @@ Route::get('/', function () {
 
 Route::get('/generate-pdf', [DashboardController::class, 'generatePdf']);
 Route::get('/pie-chart', [PieController::class, 'pieChart']);
+Route::get('/berita', [BeritaController::class, 'index']);
+Route::get('/export-excel', [BeritaController::class, 'create']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -84,7 +84,7 @@
                 @endforeach
             </tbody>
         </table>
-        {{ $data->links() }}
+        {{-- {{ $data->links() }} --}}
     </div>
 
     {{-- <h1>Distribusi Kategori Berita Bulan {{ $bulan }}</h1>

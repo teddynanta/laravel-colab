@@ -21,7 +21,7 @@ class DashboardController extends Controller
         setlocale(LC_TIME, 'id_ID');
         Carbon::setLocale('id');
         // $date = Carbon::now();
-        $specificMonth = Carbon::create(2024, 7, 1);
+        $specificMonth = Carbon::create(2024, 9, 1);
         $currentYear = $specificMonth->year;
         $currentMonth = $specificMonth->month;
         $bulan = $specificMonth->translatedformat('F');
@@ -35,7 +35,7 @@ class DashboardController extends Controller
         $totalDoc = Dokumen::whereRaw('YEAR(created_at) = ? AND MONTH(created_at) = ?', [$currentYear, $currentMonth])
             ->count();
         $data = Berita::whereRaw('YEAR(tanggal_post) = ? AND MONTH(tanggal_post) = ?', [$currentYear, $currentMonth])
-            ->paginate(10);
+            ->get();
         $news = Berita::whereRaw('YEAR(created_at) = ? AND MONTH(created_at) = ?', [$currentYear, $currentMonth])
             ->select('kategori_berita_id', DB::raw('count(*) as count'))
             ->groupBy('kategori_berita_id')
