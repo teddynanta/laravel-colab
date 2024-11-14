@@ -27,7 +27,8 @@ Route::get('/', function () {
 Route::get('/generate-pdf', [DashboardController::class, 'generatePdf']);
 Route::get('/pie-chart', [PieController::class, 'pieChart']);
 Route::get('/berita', [BeritaController::class, 'index']);
-Route::get('/export-excel', [BeritaController::class, 'create']);
+Route::get('/export-excel-bulanan', [BeritaController::class, 'exportBulanan']);
+Route::get('/export-excel-tahunan', [BeritaController::class, 'exportTahunan']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

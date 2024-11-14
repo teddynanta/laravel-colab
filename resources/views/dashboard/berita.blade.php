@@ -12,7 +12,8 @@
 <body>
     <h1>List Berita Bulan {{ $bulan }}</h1>
     <h3>Total Berita : {{ $totalData }} Berita</h3>
-    <p><a href="/export-excel">Export ke Excel</a></p>
+    <p><a href="/export-excel-bulanan">Export ke Excel Bulanan</a></p>
+    <p><a href="/export-excel-tahunan">Export ke Excel Tahunan</a></p>
     <div class="container">
         <table border="1" style="width: 100%">
             <thead>
@@ -29,7 +30,7 @@
                 @php
                     $i = 1;
                 @endphp
-                @foreach ($data as $record)
+                @foreach ($dataBulanan as $record)
                     {{-- @dd($data); --}}
                     <tr>
                         <td align="center">{{ $i }}</td>
@@ -49,8 +50,10 @@
         </table>
     </div>
     @php
-        Session::put('data', $data);
+        Session::put('dataBulanan', $dataBulanan);
+        Session::put('dataTahunan', $dataTahunan);
         Session::put('bulan', $bulan);
+        Session::put('tahun', $currentYear);
     @endphp
 </body>
 

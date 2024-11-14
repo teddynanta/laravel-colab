@@ -3,8 +3,8 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
-$data = Session::get('data');
-$bulan = Session::get('bulan');
+$data = Session::get('dataTahunan');
+$tahun = Session::get('tahun');
 $spreadsheet = new Spreadsheet();
 $sheet = $spreadsheet->getActiveSheet();
 $sheet->setTitle('Berita'); // This is where you set the title
@@ -26,7 +26,7 @@ foreach ($data as $i) {
 }
 
 $writer = new Xlsx($spreadsheet);
-$fileName = 'Data Berita Bulan ' . $bulan . '.xlsx';
+$fileName = 'Data Berita Tahun ' . $tahun . '.xlsx';
 header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
 header("Content-Disposition: attachment;filename=\"$fileName\"");
 $writer->save('php://output');

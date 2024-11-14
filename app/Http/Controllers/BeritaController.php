@@ -19,7 +19,7 @@ class BeritaController extends Controller
         setlocale(LC_TIME, 'id_ID');
         Carbon::setLocale('id');
         // $date = Carbon::now();
-        $specificMonth = Carbon::create(2024, 9, 1);
+        $specificMonth = Carbon::create(2024, 4, 1);
         $currentYear = $specificMonth->year;
         $currentMonth = $specificMonth->month;
         $bulan = $specificMonth->translatedformat('F');
@@ -28,19 +28,26 @@ class BeritaController extends Controller
         //     ->with('category')->orderBy('tanggal_post', 'asc')->get();
         $totalData = Berita::whereRaw('YEAR(tanggal_post) = ? AND MONTH(tanggal_post) = ?', [$currentYear, $currentMonth])
             ->count();
-        $data = Berita::whereRaw('YEAR(tanggal_post) = ? AND MONTH(tanggal_post) = ?', [$currentYear, $currentMonth])
+        $dataBulanan = Berita::whereRaw('YEAR(tanggal_post) = ? AND MONTH(tanggal_post) = ?', [$currentYear, $currentMonth])
+            ->get();
+        $dataTahunan = Berita::whereRaw('YEAR(tanggal_post) = ?', [$currentYear])
             ->get();
         // $this->create($data);
 
-        return view('dashboard/berita')->with(compact('data', 'totalData', 'bulan'));
+        return view('dashboard/berita')->with(compact('dataBulanan', 'totalData', 'bulan', 'currentYear', 'dataTahunan'));
+    }
+
+    public function exportTahunan()
+    {
+        return view('dashboard/export-excel-tahunan');
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function exportBulanan()
     {
-        return view('dashboard/export-excel');
+        return view('dashboard/export-excel-bulanan');
         // $data = Session::get('data');
         // return dd($data);
         // $spreadsheet = new Spreadsheet();
